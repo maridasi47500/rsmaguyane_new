@@ -1,0 +1,9 @@
+<%=form_with url: myroute_path do |form|%>
+<div>
+<%=form.text_field :cat%>
+<%=form.hidden_field :catid, value: @category.id%>
+</div>
+<div>
+<%=form.submit "valider"%>
+</div>
+<%end%>

@@ -1,0 +1,73 @@
+<%=form_with scope: "", model: category, html:{ id: "searchForm"}, url: "/component/search/" do |form|%>
+	<div class="btn-toolbar">
+		<div class="btn-group pull-left">
+			<label for="search-searchword" class="element-invisible">
+				Élément à rechercher :			</label>
+			<%=form.text_field "searchword", title: "Élément à rechercher :", placeholder: "Élément à rechercher :", id: "search-searchword", size: "30", maxlength: "200", class: "inputbox"%>
+		</div>
+		<div class="btn-group pull-left">
+			<button name="Search" onclick="this.form.submit()" class="btn hasTooltip" title="" data-original-title="Rechercher">
+				<span class="icon-search"></span>
+				Rechercher			</button>
+		</div>
+		<input type="hidden" name="task" value="search">
+		<div class="clearfix"></div>
+	</div>
+	<div class="searchintro">
+					<p>
+				<strong>Total : <span class="badge badge-info"><%=@results.length%></span> résultats trouvés.</strong>			</p>
+			</div>
+			<fieldset class="phrases">
+			<legend>
+				Rechercher :			</legend>
+			<div class="phrases-box">
+				<div class="controls">
+	<label for="searchphraseall" id="searchphraseall-lbl" class="radio">
+	
+	<%=form.radio_button "searchphrase","all", id: "searchphraseall"%>Tous les mots
+	</label>
+	<label for="searchphraseany" id="searchphraseany-lbl" class="radio">
+	<%=form.radio_button "searchphrase","any", id: "searchphraseany"%>
+	
+N'importe quel mot
+	</label>
+	<label for="searchphraseexact" id="searchphraseexact-lbl" class="radio">
+	<%=form.radio_button "searchphrase","exact", id: "searchphraseexact"%>
+	
+Phrase exacte
+	</label>
+</div>
+			</div>
+			<div class="ordering-box">
+				<label for="ordering" class="ordering">
+					Classement :				</label>
+				<%=form.select "ordering", [["Le plus récent en premier","newest"],["Le plus ancien en premier","oldest"],["Les plus populaires","popular"],["Alphabétique","alpha"],["Catégorie","category"]], {class: "inputbox", id: "ordering"} %>
+			</div>
+		</fieldset>
+				<fieldset class="only">
+			<legend>
+				Rechercher uniquement dans :			</legend>
+											<label for="area-categories" class="checkbox">
+					<%=form.check_box "areas[]",{id: "area-categories",checked: category.areas.include?("categories")}, "categories",false %>
+					Catégories				</label>
+											<label for="area-contacts" class="checkbox">
+					<%=form.check_box "areas[]", {id: "area-contacts",checked: category.areas.include?("contacts")}, "contacts", false%>
+					Contacts				</label>
+											<label for="area-content" class="checkbox">
+					<%=form.check_box "areas[]", {id: "area-content",checked: category.areas.include?("content")}, "content", false%>
+					Articles				</label>
+											<label for="area-newsfeeds" class="checkbox">
+					<%=form.check_box "areas[]", {id: "area-newsfeeds",checked: category.areas.include?("newsfeeds")}, "newsfeeds", false %>
+					Fils d'actualité				</label>
+											<label for="area-tags" class="checkbox">
+					<%=form.check_box "areas[]", {id: "area-tags",checked: category.areas.include?("tags")}, "tags",false %>
+					Tags				</label>
+					</fieldset>
+				<div class="form-limit">
+			<label for="limit">
+				Affichage #			</label>
+			<%=form.select :limit, [5,10,15,20,25,30,50,100,["Tout",0]],{id: "limit", name: "limit", class: "inputbox input-mini", size: "1", onchange: "this.form.submit()"}%>
+		</div>
+		<p class="counter">
+					</p>
+	<%end%>

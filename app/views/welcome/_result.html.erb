@@ -1,0 +1,19 @@
+<dt class="result-title">
+		<%=result_counter + 1%>. 	<a href="<%=result[1]%>">
+																
+                    <span class="highlight"><%=result[0]%></span>			
+                        </a>
+			</dt>
+<%if result[3]%>
+			<dd class="result-category">
+			<span class="small">
+				(<%=result[3]%>)
+			</span>
+		</dd>
+<%end%>
+		<dd class="result-text">
+<%=result[2].to_s.html_safe%>
+			</dd>
+			<dd class="result-created">
+			<!--Créé le 30 novembre -0001-->		
+                </dd>
